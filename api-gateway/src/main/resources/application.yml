@@ -1,8 +1,20 @@
-server.port=7777
-spring.application.name=api-gateway
+server:
+  port: 7777
+spring:
+  application:
+    name: api-gateway
 
-eureka.client.service-url.defaultZone=http://127.0.0.1:9527/eureka
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:9527/eureka
 # 自定义路由映射
-zuul.routes.order-server=/api/v1/**
+zuul:
+  routes:
+    order-server: /api/v1/**
+  # 忽略整个服务不对外提供接口
+  # ignored-services: product-server
+  ignored-patterns: /*-server/**
+
 
 
