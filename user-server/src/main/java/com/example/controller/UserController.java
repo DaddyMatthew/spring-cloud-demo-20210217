@@ -1,26 +1,33 @@
 package com.example.controller;
 
+import com.example.common.dto.RequestDto;
+import com.example.common.dto.ResponseDto;
+import com.example.common.dto.UserDto;
+import com.example.dto.UserAddDto;
+import com.example.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
-/**
- * Created by Matthew on 2021/2/15
- *
- * @author Matthew
- */
 @RestController
-@RequestMapping(value = "/api/v2/user/")
+@RequestMapping(value = "/api/user/")
 public class UserController {
 
     @Autowired
-    private RestTemplate restTemplate;
+    private IUserService service;
 
-    @GetMapping(value = "/queryProduct")
-    public Object queryProduct() {
-        Object o = restTemplate.getForObject("http://product-server/api/v1/product/queryById?product_id=" + "001", Object.class);
-        return o;
+    @PostMapping(value = "/addUser")
+    public ResponseDto<UserDto> addUser(@RequestBody RequestDto<UserAddDto> requestDto) {
+        service.addUser(requestDto.getBody(), requestDto.getUser());
+        return new ResponseDto<UserDto>().setCode("200");
     }
+
+    @PostMapping(value = "/queryUser")
+    public ResponseDto<UserDto> queryUser(@RequestBody RequestDto<String> requestDto) {
+        UserDto userDto = service.queryUserByToken(requestDto.getBody());
+        return new ResponseDto<UserDto>().setCode("200").setBody(userDto);
+    }
+
 }

@@ -6,6 +6,7 @@
     <groupId>com.example</groupId>
     <artifactId>spring-cloud-demo-parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -46,8 +47,11 @@
 
     <modules>
         <module>eureka-server</module>
+        <module>web-server</module>
+        <module>order-server</module>
         <module>product-server</module>
         <module>user-server</module>
+        <module>common-dependency</module>
     </modules>
 
     <build>
@@ -55,6 +59,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.0.3.RELEASE</version>
             </plugin>
         </plugins>
     </build>

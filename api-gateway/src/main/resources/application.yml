@@ -1,0 +1,8 @@
+server.port=7777
+spring.application.name=api-gateway
+
+eureka.client.service-url.defaultZone=http://127.0.0.1:9527/eureka
+# 自定义路由映射
+zuul.routes.order-server=/api/v1/**
+
+

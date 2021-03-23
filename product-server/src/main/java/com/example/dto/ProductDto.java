@@ -18,10 +18,19 @@ public class ProductDto {
     private String name;
     private Double price;
 
-    public static List<ProductDto> createList() {
+    public static List<ProductDto> createProductList(String orderNo) {
         return Lists.newArrayList(
-                new ProductDto("001", "椅子", 10.5d),
-                new ProductDto("002", "桌子", 50.5d),
-                new ProductDto("003", "沙发", 100.5d));
+                new ProductDto("1", "椅子A-" + orderNo, 100d),
+                new ProductDto("2", "椅子B-" + orderNo, 100d),
+                new ProductDto("3", "椅子C-" + orderNo, 100d)
+        );
+    }
+
+    public static List<ProductDto> createProductList() {
+        return Lists.newArrayList(
+                new ProductDto("1", "椅子A", 100d),
+                new ProductDto("2", "椅子B", 100d),
+                new ProductDto("3", "椅子C", 100d)
+        );
     }
 }
