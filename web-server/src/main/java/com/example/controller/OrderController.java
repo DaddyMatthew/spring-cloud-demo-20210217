@@ -25,8 +25,6 @@ public class OrderController {
 
     @Autowired
     private IOrderFeignService orderFeignService;
-    @Autowired
-    private IProductFeignService productFeignService;
 
     @RequestMapping(value = "/queryOrder")
     @HystrixCommand(fallbackMethod = "queryOrderFallback")
@@ -35,12 +33,9 @@ public class OrderController {
     }
 
     // 方法签名一定要和api方法（queryOrder）一致
-    private ResponseDto queryOrderFallback(RequestDto<String> requestDto) {
+    private ResponseDto<OrderDto> queryOrderFallback(RequestDto<String> requestDto) {
         return new ResponseDto().setCode("500").setMessage("服务器貌似开了个小差~");
     }
 
-    @RequestMapping(value = "/queryProductList")
-    public ResponseDto<List<ProductDto>> queryProductList(@RequestBody RequestDto<OrderDto> requestDto) {
-        return productFeignService.queryProductList(requestDto);
-    }
+
 }

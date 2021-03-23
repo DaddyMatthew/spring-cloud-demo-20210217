@@ -13,6 +13,6 @@ import java.util.List;
 @FeignClient(value = "PRODUCT-SERVER", fallback = ProductFallbackService.class)
 public interface IProductFeignService {
 
-    @PostMapping(value = "/api/order-product")
+    @PostMapping(value = "/api/order-product/queryProductList")
     ResponseDto<List<ProductDto>> queryProductList(RequestDto<OrderDto> requestDto);
 }

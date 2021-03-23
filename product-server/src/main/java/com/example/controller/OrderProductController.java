@@ -11,13 +11,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping(value = "/api/order-product")
 public class OrderProductController {
 
     @RequestMapping(value = "/queryProductList", method = RequestMethod.POST)
-    public ResponseDto<List<ProductDto>> queryProductList(@RequestBody RequestDto<OrderDto> requestDto) {
+    public ResponseDto<List<ProductDto>> queryProductList(@RequestBody RequestDto<OrderDto> requestDto) throws InterruptedException {
+        if (requestDto.getBody().getOrderNo().indexOf("1") > 0) {
+            TimeUnit.SECONDS.sleep(4);
+        }
         return new ResponseDto<List<ProductDto>>().setCode("200").setBody(this.createProductList(requestDto.getBody().getOrderNo()));
     }
 

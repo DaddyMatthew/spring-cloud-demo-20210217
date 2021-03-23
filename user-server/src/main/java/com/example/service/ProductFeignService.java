@@ -1,13 +1,13 @@
-package com.example.controller;
+package com.example.service;
 
 import com.example.common.dto.ResponseDto;
-import feign.Param;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient(name = "PRODUCT-SERVER")
-public interface ProductFeignController {
+public interface ProductFeignService {
 
-    @RequestMapping(value = "/api/v1/product/queryById")
-    ResponseDto queryById(@Param("product_id") String id);
+    @GetMapping(value = "/api/product/queryById")
+    ResponseDto queryById(@RequestParam("product_id") String id);
 }

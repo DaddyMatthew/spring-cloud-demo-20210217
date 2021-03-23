@@ -2,7 +2,6 @@ package com.example.controller;
 
 import com.example.common.dto.ResponseDto;
 import com.example.service.ProductFeignService;
-import feign.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,8 +15,8 @@ import org.springframework.web.client.RestTemplate;
  * @author Matthew
  */
 @RestController
-@RequestMapping(value = "/api/v2/user/")
-public class UserController {
+@RequestMapping(value = "/api/productUser/")
+public class ProdUserController {
 
     @Autowired
     private RestTemplate restTemplate;
@@ -26,7 +25,7 @@ public class UserController {
 
     @GetMapping(value = "/queryProduct")
     public Object queryProduct() {
-        Object o = restTemplate.getForObject("http://product-server/api/v1/product/queryById?product_id=" + "001", Object.class);
+        Object o = restTemplate.getForObject("http://product-server/api/product/queryById?product_id=" + "001", Object.class);
         return o;
     }
 

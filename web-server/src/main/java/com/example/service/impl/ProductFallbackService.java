@@ -5,13 +5,17 @@ import com.example.common.dto.ResponseDto;
 import com.example.dto.OrderDto;
 import com.example.dto.ProductDto;
 import com.example.service.IProductFeignService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
+@Slf4j
 public class ProductFallbackService implements IProductFeignService {
     @Override
     public ResponseDto<List<ProductDto>> queryProductList(RequestDto<OrderDto> requestDto) {
-        System.out.println("feign fallback query product list error");
-        return null;
+        log.info("@@@@ feign fallback query product list error");
+        return new ResponseDto<List<ProductDto>>().setCode("500").setMessage("fallback implement method - 0002");
     }
 }

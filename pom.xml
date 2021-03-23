@@ -47,6 +47,7 @@
 
     <modules>
         <module>eureka-server</module>
+        <module>api-gateway</module>
         <module>web-server</module>
         <module>order-server</module>
         <module>product-server</module>

@@ -1,12 +1,12 @@
 package com.example.controller;
 
 import com.example.dto.ProductDto;
-import com.example.dto.ResponseDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import com.example.common.dto.ResponseDto;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ import java.util.List;
  * @author Matthew
  */
 @RestController
-@RequestMapping(value = "/api/v1/product")
+@RequestMapping(value = "/api/product")
 public class ProductController {
 
     @Value("${server.port}")
@@ -25,14 +25,14 @@ public class ProductController {
     @GetMapping(value = "/queryList")
     public ResponseDto queryProductList() {
         ResponseDto responseDto = new ResponseDto();
-        responseDto.setBody(ProductDto.createList());
+        responseDto.setBody(ProductDto.createProductList());
         responseDto.setCode(this.serverPort);
         return responseDto;
     }
 
     @GetMapping(value = "/queryById")
     public ResponseDto queryById(@RequestParam("product_id") String id) {
-        List<ProductDto> list = ProductDto.createList();
+        List<ProductDto> list = ProductDto.createProductList();
         ProductDto dto = list.stream().filter(i -> i.getId().equals(id)).findFirst().orElse(null);
 
         ResponseDto responseDto = new ResponseDto();
