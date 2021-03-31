@@ -1,14 +1,15 @@
 package com.example.controller;
 
-import com.example.dto.OrderDto;
-import com.example.common.dto.RequestDto;
-import com.example.common.dto.ResponseDto;
-import com.example.dto.ProductDto;
+import com.example.domain.RequestDto;
+import com.example.domain.ResponseDto;
+import com.example.dto.DscOrder;
+import com.example.dto.ProductDetailDto;
 import com.example.service.IOrderProductFeignService;
+import com.example.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -19,16 +20,19 @@ import java.util.List;
  * @author Matthew
  */
 @RestController
-@RequestMapping(value = "/api/order")
+@RequestMapping(value = "/order")
 public class OrderController {
 
     @Autowired
-    private IOrderProductFeignService orderProductFeignService;
+    private IOrderService iOrderService;
+    @Autowired
+    private IOrderProductFeignService iOrderProductFeignService;
 
-    @RequestMapping(value = "/queryOrder")
-    public ResponseDto<OrderDto> queryOrder(@RequestBody RequestDto<String> dto) {
-        OrderDto orderDto = new OrderDto().setId("1").setOrderNo(dto.getBody());
-        ResponseDto<List<ProductDto>> productRes = orderProductFeignService.queryProductByOrder(new RequestDto<OrderDto>().setBody(orderDto));
-        return new ResponseDto<OrderDto>().setCode("200").setBody(orderDto.setProductList(productRes.getBody()));
+    @RequestMapping(value = "/queryOrderByNo", method = RequestMethod.POST)
+    public ResponseDto<DscOrder> queryOrder(@RequestBody RequestDto<String> requestDto) {
+        DscOrder order = iOrderService.queryOrderByNo(requestDto.getBody());
+        ResponseDto<List<ProductDetailDto>> productsResponseDto = iOrderProductFeignService.queryProductByOrder(RequestDto.create(order));
+        order.setProducts(productsResponseDto.getBody());
+        return ResponseDto.<DscOrder>success().setBody(order);
     }
 }

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+    <properties resource="mysql-connect.properties"/>
+
+
+
+    <context id="default" targetRuntime="MyBatis3">
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin" />
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <!--是否去除自动生成的注释 true:是; false:否-->
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <!--数据库连接信息：驱动类、链接地址、用户名、密码 -->
+        <jdbcConnection driverClass="${datasource.driver-class-name}"
+                        connectionURL="${datasource.url}"
+                        userId="${datasource.username}"
+                        password="${datasource.password}">
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <!--类型解析器-->
+            <!-- 默认false，把jdbc decimal 和 numeric 类型解析为integer -->
+            <!-- true，把jdbc decimal 和 numeric 类型解析为java.math.bigdecimal-->
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- 实体类存放路径 -->
+        <javaModelGenerator targetPackage="com.example.dto" targetProject="src/main/java">
+            <!-- 是否允许子包 -->
+            <property name="enableSubPackages" value="false"/>
+            <!-- 是否对modal添加构造函数 -->
+            <property name="constructorBased" value="false"/>
+            <!-- 是否清理从数据库中查询出的字符串左右两边的空白字符 -->
+            <property name="trimStrings" value="true"/>
+            <!-- 建立modal对象是否不可改变 即生成的modal对象不会有setter方法，只有构造方法 -->
+            <property name="immutable" value="false"/>
+        </javaModelGenerator>
+        <!-- mapper 存放路径 -->
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources">
+            <!-- 针对数据库的一个配置，是否把 schema 作为字包名 -->
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+        <!-- XML 存放路径-->
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="com.example.mapper" targetProject="src/main/java">
+            <!-- 针对 oracle 数据库的一个配置，是否把 schema 作为字包名 -->
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+
+
+        <table tableName="dsc_operator_user"></table>
+        <table tableName="dsc_token"></table>
+        <table tableName="dsc_product_category"></table>
+        <table tableName="dsc_product_item"></table>
+        <table tableName="dsc_order_status"></table>
+        <table tableName="dsc_order"></table>
+        <table tableName="dsc_user_order_list"></table>
+        <table tableName="dsc_order_product_list"></table>
+    </context>
+</generatorConfiguration>

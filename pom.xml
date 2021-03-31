@@ -46,6 +46,7 @@
     </dependencyManagement>
 
     <modules>
+        <module>mybatis-generator</module>
         <module>eureka-server</module>
         <module>api-gateway</module>
         <module>web-server</module>

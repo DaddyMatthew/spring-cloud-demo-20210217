@@ -1,7 +1,7 @@
 package com.example.controller;
 
-import com.example.common.dto.RequestDto;
-import com.example.common.dto.ResponseDto;
+import com.example.domain.RequestDto;
+import com.example.domain.ResponseDto;
 import com.example.dto.OrderDto;
 import com.example.dto.ProductDto;
 import com.example.service.IProductFeignService;
@@ -11,7 +11,6 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

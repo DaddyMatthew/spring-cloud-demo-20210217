@@ -1,12 +1,12 @@
 package com.example.service;
-
-
-import com.example.common.dto.UserDto;
-import com.example.dto.UserAddDto;
+import com.example.dto.DscOperatorUser;
+import com.example.dto.DscToken;
 
 public interface IUserService {
 
-    void addUser(UserAddDto userAddDto, UserDto userDto);
+    void insertUser(DscOperatorUser dto);
 
-    UserDto queryUserByToken(String token);
+    DscOperatorUser queryUserByToken(DscToken dto);
+
+    DscOperatorUser login(DscOperatorUser dto);
 }

@@ -1,7 +1,7 @@
 package com.example.service.impl;
 
-import com.example.common.dto.RequestDto;
-import com.example.common.dto.ResponseDto;
+import com.example.domain.RequestDto;
+import com.example.domain.ResponseDto;
 import com.example.dto.OrderDto;
 import com.example.dto.ProductDto;
 import com.example.service.IProductFeignService;
